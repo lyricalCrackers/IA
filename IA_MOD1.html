@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller: 30 Horas de Herramientas IA para Productividad</title>
+    <style>
+        /* ========== ESTILOS GLOBALES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #0b1120 0%, #19223f 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .taller-container {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ========== BARRA DE PROGRESO ========== */
+        .progress-wrapper {
+            background: #1e2b3c;
+            padding: 12px 24px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .progress-track {
+            height: 8px;
+            background: #2d3e54;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            width: 12.5%; /* 1/8 de las diapositivas */
+            transition: width 0.4s ease;
+            border-radius: 100px;
+        }
+        
+        /* ========== CONTENEDOR PRINCIPAL ========== */
+        .slides-container {
+            position: relative;
+            min-height: 700px;
+            background: white;
+        }
+        
+        /* ========== DIAPOSITIVAS ========== */
+        .slide {
+            display: none;
+            padding: 35px 40px;
+            animation: fadeSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        
+        @keyframes fadeSlide {
+            from { opacity: 0.4; transform: translateX(15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        /* Scroll personalizado */
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .slide::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .slide::-webkit-scrollbar-thumb {
+            background: #4facfe;
+            border-radius: 10px;
+        }
+        
+        /* ========== TIPOGRAFÍA ========== */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0b1120;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #4facfe;
+            padding-bottom: 12px;
+        }
+        
+        h2 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #1a2a4f;
+            margin: 30px 0 20px 0;
+            border-left: 6px solid #4facfe;
+            padding-left: 18px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e66;
+            margin: 20px 0 15px 0;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #3e4f7a;
+            margin: 15px 0 10px 0;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 18px;
+        }
+        
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        /* ========== TABLAS ========== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            font-weight: 600;
+            padding: 15px 12px;
+            font-size: 1rem;
+        }
+        
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e9ecef;
+            background: white;
+        }
+        
+        tr:hover td {
+            background: #f8fbff;
+        }
+        
+        /* ========== EJEMPLOS DE CÓDIGO ========== */
+        .code-block {
+            background: #1a2639;
+            color: #e4f0ff;
+            padding: 20px;
+            border-radius: 16px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            overflow-x: auto;
+            border-left: 6px solid #4facfe;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .code-comment {
+            color: #7a8faa;
+            font-style: italic;
+        }
+        
+        .code-prompt {
+            color: #ffb86b;
+        }
+        
+        .code-output {
+            color: #9fdf9f;
+        }
+        
+        .code-highlight {
+            background: #2d3f5e;
+            padding: 2px 6px;
+            border-radius: 6px;
+            color: #ffd966;
+        }
+        
+        /* ========== TARJETAS DE HERRAMIENTAS ========== */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 50, 100, 0.08);
+            border: 1px solid #eef2f6;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(79, 172, 254, 0.15);
+            border-color: #4facfe;
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .tool-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a2a4f;
+            margin-bottom: 8px;
+        }
+        
+        .tool-url {
+            background: #f0f7ff;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #1e3c72;
+            display: inline-block;
+            margin-bottom: 15px;
+            word-break: break-all;
+        }
+        
+        .tool-url a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .tool-url a:hover {
+            text-decoration: underline;
+        }
+        
+        .tool-desc {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #3e4f7a;
+        }
+        
+        /* ========== TARJETAS DE EJERCICIOS ========== */
+        .exercise-card {
+            background: #f2f9ff;
+            border-left: 8px solid #4facfe;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0 30px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        
+        .exercise-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a2a4f;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .exercise-title span {
+            background: #4facfe;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+        
+        /* ========== DESTACADOS ========== */
+        .highlight-box {
+            background: #eef5ff;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 6px solid #4facfe;
+            margin: 25px 0;
+        }
+        
+        .tip-box {
+            background: #e1f7ed;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 6px solid #00c9b6;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff4e5;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 6px solid #ffaa46;
+            margin: 20px 0;
+        }
+        
+        /* ========== MÓDULO HEADER ========== */
+        .module-badge {
+            background: linear-gradient(145deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 16px rgba(0, 40, 80, 0.2);
+        }
+        
+        .module-time {
+            background: #eef2f6;
+            color: #1e3c72;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+        
+        /* ========== NAVEGACIÓN ========== */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px 30px 40px;
+            background: white;
+            border-top: 1px solid #eef2f6;
+        }
+        
+        .nav-button {
+            background: white;
+            border: 2px solid #e9edf2;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e3c72;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-button:hover:not(:disabled) {
+            background: #1e3c72;
+            border-color: #1e3c72;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 60, 114, 0.2);
+        }
+        
+        .nav-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .indicators {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .indicator {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #eef2f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #1e3c72;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .indicator.active {
+            background: #1e3c72;
+            color: white;
+            border-color: #4facfe;
+            transform: scale(1.1);
+        }
+        
+        .indicator:hover:not(.active) {
+            background: #d0e0ff;
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .slide { padding: 20px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            .tool-grid { grid-template-columns: 1fr; }
+            .nav-controls { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="taller-container">
+        <!-- BARRA DE PROGRESO -->
+        <div class="progress-wrapper">
+            <div class="progress-header">
+                <span>Taller 30h: IA para Productividad</span>
+                <span id="slideCounter">Diapositiva 1 de 8</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width: 12.5%"></div>
+            </div>
+        </div>
+        
+        <!-- CONTENEDOR DE DIAPOSITIVAS -->
+        <div class="slides-container" id="slidesContainer">
+            <!-- ========== DIAPOSITIVA 1: PORTADA ========== -->
+            <div class="slide active" id="slide1">
+                <div style="text-align: center; padding: 20px 0 40px 0;">
+                    <div class="module-badge" style="font-size: 1.8rem; padding: 20px 40px;">🚀 TALLER INTENSIVO</div>
+                    <h1 style="font-size: 3.2rem; border-bottom: none; margin-top: 20px;">Herramientas de Inteligencia Artificial para la Productividad</h1>
+                    <p style="font-size: 1.5rem; color: #2a5298; margin: 20px 0;">30 Horas · 6 Módulos · 100% Práctico</p>
+                    
+                    <div style="background: linear-gradient(145deg, #f5f9ff, white); padding: 40px; border-radius: 40px; margin: 40px 0;">
+                        <h2>🎯 Objetivos del Taller</h2>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 30px;">
+                            <div style="background: white; padding: 25px; border-radius: 25px; box-shadow: 0 5px 10px rgba(0,0,0,0.03);">
+                                <div style="font-size: 2rem; margin-bottom: 15px;">🧠</div>
+                                <h3>Fundamentos</h3>
+                                <p>Comprender los conceptos clave de IA y su aplicación práctica</p>
+                            </div>
+                            <div style="background: white; padding: 25px; border-radius: 25px; box-shadow: 0 5px 10px rgba(0,0,0,0.03);">
+                                <div style="font-size: 2rem; margin-bottom: 15px;">⚡</div>
+                                <h3>Prompts</h3>
+                                <p>Dominar la ingeniería de prompts para resultados óptimos</p>
+                            </div>
+                            <div style="background: white; padding: 25px; border-radius: 25px; box-shadow: 0 5px 10px rgba(0,0,0,0.03);">
+                                <div style="font-size: 2rem; margin-bottom: 15px;">🔧</div>
+                                <h3>10+ Herramientas</h3>
+                                <p>Más de 10 herramientas gratuitas con ejercicios prácticos</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2>📋 Estructura del Taller</h2>
+                    <table>
+                        <tr><th>Módulo</th><th>Título</th><th>Duración</th></tr>
+                        <tr><td>1</td><td>Conceptos Básicos de Inteligencia Artificial</td><td>4 horas</td></tr>
+                        <tr><td>2</td><td>Ingeniería de Prompts: Fundamentos</td><td>4 horas</td></tr>
+                        <tr><td>3</td><td>Ingeniería de Prompts: Técnicas Avanzadas</td><td>4 horas</td></tr>
+                        <tr><td>4</td><td>10 Herramientas de IA para Productividad (Gratuitas)</td><td>4 horas</td></tr>
+                        <tr><td>5</td><td>Integración y Automatización de Procesos</td><td>4 horas</td></tr>
+                        <tr><td>6</td><td>Proyecto Final y Mejores Prácticas</td><td>4 horas</td></tr>
+                    </table>
+                    
+                    <div class="tip-box" style="margin-top: 40px;">
+                        <p style="font-size: 1.2rem; margin: 0;">✅ <strong>Requisito:</strong> Tener una cuenta gratuita en ChatGPT, Gemini y Claude para los ejercicios prácticos.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== DIAPOSITIVA 2: MÓDULO 1 ========== -->
+            <div class="slide" id="slide2">
+                <span class="module-badge">📘 Módulo 1 · 4 horas</span>
+                <h1>Conceptos Básicos de Inteligencia Artificial</h1>
+                
+                <h2>🧠 ¿Qué es la Inteligencia Artificial?</h2>
+                <p>La IA es un campo de la informática que desarrolla sistemas capaces de realizar tareas que requieren inteligencia humana: aprendizaje, razonamiento, percepción, comprensión del lenguaje y resolución de problemas.</p>
+                
+                <h2>📊 Evolución de la IA</h2>
+                <table>
+                    <tr><th>Era</th><th>Hito</th></tr>
+                    <tr><td>1950-1970</td><td>IA simbólica, primeros programas de ajedrez</td></tr>
+                    <tr><td>1980-2000</td><td>Sistemas expertos, machine learning temprano</td></tr>
+                    <tr><td>2010-2020</td><td>Deep learning, AlexNet, AlphaGo</td></tr>
+                    <tr><td>2022-presente</td><td>IA Generativa, LLMs (GPT, Gemini, Claude)</td></tr>
+                </table>
+                
+                <h2>🧩 Tipos de IA</h2>
+                <ul>
+                    <li><strong>IA Débil (Narrow AI):</strong> Especializada en una tarea (ej: ChatGPT, asistentes, recomendadores)</li>
+                    <li><strong>IA Fuerte (General AI):</strong> Habilidad cognitiva humana general (teórico, aún no existe)</li>
+                    <li><strong>Superinteligencia:</strong> Supera capacidad humana (concepto futurista)</li>
+                </ul>
+                
+                <h2>📈 Machine Learning vs Deep Learning vs IA Generativa</h2>
+                <div class="code-block">
+                    <span class="code-comment"># Machine Learning tradicional</span><br>
+                    modelo = RandomForestClassifier()<br>
+                    modelo.fit(X_train, y_train)  <span class="code-comment"># Entrena con datos etiquetados</span><br>
+                    prediccion = modelo.predict(nuevos_datos)<br><br>
+                    
+                    <span class="code-comment"># Deep Learning (Redes neuronales profundas)</span><br>
+                    import tensorflow as tf<br>
+                    red = tf.keras.Sequential([<br>
+                    &nbsp;&nbsp;tf.keras.layers.Dense(128, activation='relu'),  <span class="code-comment"># Capa oculta 1</span><br>
+                    &nbsp;&nbsp;tf.keras.layers.Dense(64, activation='relu'),   <span class="code-comment"># Capa oculta 2</span><br>
+                    &nbsp;&nbsp;tf.keras.layers.Dense(10, activation='softmax') <span class="code-comment"># Capa salida</span><br>
+                    ])<br><br>
+                    
+                    <span class="code-comment"># IA Generativa (Prompt a modelo)</span><br>
+                    prompt = "Explica qué es el deep learning en 3 oraciones"<br>
+                    respuesta = modelo_generativo.generate(prompt) <span class="code-comment"># Genera texto nuevo</span>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 1.1: Clasificación de aplicaciones <span>15 min</span></div>
+                    <p><strong>Instrucciones:</strong> Clasifica cada aplicación en IA Débil, Fuerte o No IA. Justifica.</p>
+                    <ol>
+                        <li>Siri/Alexa respondiendo preguntas</li>
+                        <li>Calculadora científica</li>
+                        <li>Netflix recomendando películas</li>
+                        <li>Robot que aprende a caminar por sí solo</li>
+                        <li>Sistema que diagnostica cáncer mejor que médicos</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 1.2: Identificación de casos de uso <span>20 min</span></div>
+                    <p><strong>Instrucciones:</strong> En grupos, identifiquen 5 tareas cotidianas en su trabajo/estudio que podrían automatizarse con IA. Para cada una, describan qué tipo de IA sería necesaria.</p>
+                    <p><strong>Ejemplo:</strong> Redacción de correos → IA generativa de texto.</p>
+                </div>
+            </div>
+            
+            <!-- ========== DIAPOSITIVA 3: MÓDULO 2 ========== -->
+            <div class="slide" id="slide3">
+                <span class="module-badge">📗 Módulo 2 · 4 horas</span>
+                <h1>Ingeniería de Prompts: Fundamentos</h1>
+                
+                <h2>❓ ¿Qué es un prompt?</h2>
+                <p>Un prompt es la instrucción que le damos a un modelo de IA para obtener una respuesta específica. La calidad del prompt determina la calidad de la respuesta.</p>
+                
+                <h2>🧱 Elementos de un buen prompt</h2>
+                <ul>
+                    <li><strong>Contexto:</strong> Antecedentes necesarios</li>
+                    <li><strong>Instrucción clara:</strong> Qué queremos que haga</li>
+                    <li><strong>Formato deseado:</strong> Cómo queremos la respuesta</li>
+                    <li><strong>Ejemplos (few-shot):</strong> Demostraciones del resultado esperado</li>
+                    <li><strong>Restricciones:</strong> Límites (longitud, tono, exclusiones)</li>
+                </ul>
+                
+                <h2>⚡ Comparación: Prompt básico vs avanzado</h2>
+                <div class="code-block">
+                    <span class="code-comment"># ❌ Básico (poco efectivo)</span><br>
+                    <span class="code-prompt">"Resume este texto: [texto]"</span><br><br>
+                    
+                    <span class="code-comment"># ✅ Avanzado (efectivo)</span><br>
+                    <span class="code-prompt">"Actúa como un analista de datos senior. Resume el siguiente informe en 3 párrafos:</span><br>
+                    <span class="code-prompt">- Primer párrafo: hallazgos principales</span><br>
+                    <span class="code-prompt">- Segundo párrafo: implicaciones para negocio</span><br>
+                    <span class="code-prompt">- Tercer párrafo: recomendaciones concretas</span><br>
+                    <span class="code-prompt">Usa lenguaje claro, evita jerga técnica. Máximo 300 palabras.</span><br>
+                    <span class="code-prompt">[texto]”</span>
+                </div>
+                
+                <h2>🎭 Asignación de roles (Role Prompting)</h2>
+                <div class="code-block">
+                    <span class="code-prompt">"Eres un abogado especializado en propiedad intelectual con 15 años de experiencia. Analiza este contrato de licencia de software desde la perspectiva del licenciatario. Identifica 3 cláusulas riesgosas y sugiere lenguaje alternativo."</span>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 2.1: Mejora de prompts <span>25 min</span></div>
+                    <p><strong>Instrucciones:</strong> Transforma estos prompts básicos en prompts avanzados aplicando los elementos aprendidos:</p>
+                    <ol>
+                        <li>"Explica qué es el machine learning"</li>
+                        <li>"Haz un plan de marketing"</li>
+                        <li>"Ayúdame con mi tarea"</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 2.2: Prompting con ChatGPT <span>30 min</span></div>
+                    <p><strong>Instrucciones:</strong> Usa ChatGPT (gratuito) y prueba al menos 5 prompts diferentes para una misma tarea (ej: planificar un viaje). Analiza cómo cambia la respuesta según el nivel de detalle y contexto del prompt.</p>
+                </div>
+            </div>
+            
+            <!-- ========== DIAPOSITIVA 4: MÓDULO 3 ========== -->
+            <div class="slide" id="slide4">
+                <span class="module-badge">📙 Módulo 3 · 4 horas</span>
+                <h1>Ingeniería de Prompts: Técnicas Avanzadas</h1>
+                
+                <h2>🔗 Prompt Chaining (Encadenamiento)</h2>
+                <p>Dividir una tarea compleja en una secuencia de prompts donde la salida de uno alimenta al siguiente.</p>
+                <div class="code-block">
+                    <span class="code-comment"># Paso 1: Extraer información clave</span><br>
+                    <span class="code-prompt">"Extrae de este artículo: (1) problema principal, (2) metodología, (3) conclusiones."</span><br><br>
+                    <span class="code-comment"># Paso 2: Analizar con la información extraída</span><br>
+                    <span class="code-prompt">"Basado en [problema] y [metodología], ¿qué limitaciones tiene este estudio?"</span><br><br>
+                    <span class="code-comment"># Paso 3: Generar recomendaciones</span><br>
+                    <span class="code-prompt">"Con las limitaciones identificadas, propón 3 mejoras para futuras investigaciones."</span>
+                </div>
+                
+                <h2>📚 Few-Shot Prompting</h2>
+                <p>Proporcionar ejemplos para guiar el formato y estilo de la respuesta.</p>
+                <div class="code-block">
+                    <span class="code-prompt">"Clasifica el sentimiento de los siguientes comentarios como Positivo, Negativo o Neutral.</span><br><br>
+                    <span class="code-prompt">Ejemplo 1: 'Me encantó el producto, funciona perfecto' → Positivo</span><br>
+                    <span class="code-prompt">Ejemplo 2: 'Llegó tarde y roto' → Negativo</span><br>
+                    <span class="code-prompt">Ejemplo 3: 'El producto es regular' → Neutral</span><br><br>
+                    <span class="code-prompt">Comentario: 'La atención al cliente fue excelente, pero el envío demoró mucho' →"</span>
+                </div>
+                
+                <h2>🔄 Chain of Thought (Cadena de Pensamiento)</h2>
+                <p>Pedir a la IA que muestre el razonamiento paso a paso antes de dar la respuesta final.</p>
+                <div class="code-block">
+                    <span class="code-prompt">"Resuelve el siguiente problema paso a paso, explicando tu razonamiento antes de dar la respuesta final:</span><br>
+                    <span class="code-prompt">'Un cliente compró 3 productos a $25 cada uno, pero tenía un cupón de 15% de descuento. También pagó $8 de envío. ¿Cuánto pagó en total?'"</span><br><br>
+                    <span class="code-comment"># La IA mostrará: cálculo subtotal → descuento → + envío → total</span>
+                </div>
+                
+                <h2>🧪 Parámetros avanzados</h2>
+                <ul>
+                    <li><strong>Temperatura:</strong> Controla creatividad/aleatoriedad (0 = determinista, 1 = muy creativo)</li>
+                    <li><strong>Top_p (nucleus sampling):</strong> Selecciona tokens con probabilidad acumulada p</li>
+                    <li><strong>Max tokens:</strong> Límite de longitud de respuesta</li>
+                </ul>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 3.1: Diseño de cadena de prompts <span>35 min</span></div>
+                    <p><strong>Instrucciones:</strong> Diseña una cadena de al menos 4 prompts para una tarea compleja de tu área profesional. Define qué información pasa de un paso al siguiente.</p>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 3.2: Few-shot vs Zero-shot <span>25 min</span></div>
+                    <p><strong>Instrucciones:</strong> Prueba un mismo problema con zero-shot (sin ejemplos) y few-shot (con 2-3 ejemplos). Compara la calidad de las respuestas y documenta las diferencias.</p>
+                </div>
+            </div>
+            
+            <!-- ========== DIAPOSITIVA 5: MÓDULO 4 (10 HERRAMIENTAS GRATUITAS) ========== -->
+            <div class="slide" id="slide5">
+                <span class="module-badge">🧰 Módulo 4 · 4 horas</span>
+                <h1>10 Herramientas de IA GRATUITAS para Productividad</h1>
+                <p style="font-size: 1.3rem;">Selección de las herramientas más potentes con acceso gratuito en 2026 [citation:1][citation:5]</p>
+                
+                <!-- HERRAMIENTA 1: ChatGPT -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">🤖</div>
+                    <div class="tool-name">ChatGPT (OpenAI)</div>
+                    <div class="tool-url">🔗 <a href="https://chat.openai.com" target="_blank">chat.openai.com</a></div>
+                    <div class="tool-desc">El asistente conversacional más versátil. El nivel gratuito incluye GPT-4o mini y acceso limitado a GPT-5 [citation:1][citation:5]. Ideal para redacción, brainstorming, resúmenes, código, y más.</div>
+                    
+                    <h4>📌 Ejercicio 4.1A: Resumen ejecutivo</h4>
+                    <div class="code-block">
+                        <span class="code-comment"># Prompt para ChatGPT:</span><br>
+                        <span class="code-prompt">"Actúa como consultor senior. Resume el siguiente artículo en un resumen ejecutivo de una página, incluyendo: contexto, hallazgos clave, y 3 recomendaciones accionables. Utiliza viñetas para los hallazgos."</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.1B: Análisis de datos con código</h4>
+                    <div class="code-block">
+                        <span class="code-comment"># ChatGPT puede ejecutar código Python en el nivel gratuito</span><br>
+                        <span class="code-prompt">"Tengo estos datos de ventas: [fecha, producto, monto]. Genera un script en Python que calcule:</span><br>
+                        <span class="code-prompt">- Ventas totales por producto</span><br>
+                        <span class="code-prompt">- Top 3 productos</span><br>
+                        <span class="code-prompt">- Tendencia mensual con gráfico de líneas (usando matplotlib)"</span>
+                    </div>
+                    <p>✅ <strong>Objetivo:</strong> Practicar análisis de datos asistido por IA.</p>
+                </div>
+                
+                <!-- HERRAMIENTA 2: Google Gemini -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">🌀</div>
+                    <div class="tool-name">Google Gemini</div>
+                    <div class="tool-url">🔗 <a href="https://gemini.google.com" target="_blank">gemini.google.com</a></div>
+                    <div class="tool-desc">Integración nativa con Google Workspace (Gmail, Docs, Sheets). Nivel gratuito con Gemini 3 Flash y 100 créditos mensuales para funciones avanzadas [citation:1][citation:5]. Excelente para investigación y productividad.</div>
+                    
+                    <h4>📌 Ejercicio 4.2A: Análisis de correos</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Conecta con mi Gmail (simulado) y analiza los últimos 20 correos. Identifica:</span><br>
+                        <span class="code-prompt">- Cuántos requieren respuesta urgente</span><br>
+                        <span class="code-prompt">- Temas principales de la bandeja de entrada</span><br>
+                        <span class="code-prompt">- Propón una estructura de organización (etiquetas/carpetas) basada en el contenido"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.2B: Creación de dashboard en Sheets</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Crea una plantilla para Google Sheets que funcione como dashboard de productividad personal. Incluye:</span><br>
+                        <span class="code-prompt">- Seguimiento de tareas diarias</span><br>
+                        <span class="code-prompt">- Gráfico de progreso semanal</span><br>
+                        <span class="code-prompt">- Fórmulas automáticas para calcular % completado"</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 3: Claude (Anthropic) -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">🧪</div>
+                    <div class="tool-name">Claude</div>
+                    <div class="tool-url">🔗 <a href="https://claude.ai" target="_blank">claude.ai</a></div>
+                    <div class="tool-desc">Conocido por su "voz humana" y gran ventana de contexto (200k+ tokens). Nivel gratuito con acceso a Claude Sonnet 4.5 [citation:5][citation:6]. Excelente para análisis de documentos largos y escritura creativa.</div>
+                    
+                    <h4>📌 Ejercicio 4.3A: Análisis de PDF extenso</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Adjunto un PDF de 50 páginas (informe anual). Necesito:</span><br>
+                        <span class="code-prompt">- Resumen ejecutivo de 1 página</span><br>
+                        <span class="code-prompt">- Principales métricas financieras extraídas en tabla</span><br>
+                        <span class="code-prompt">- Análisis de riesgos mencionados</span><br>
+                        <span class="code-prompt">- Comparación con año anterior si hay datos"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.3B: Edición de tono profesional</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Toma este borrador de correo y adáptalo para diferentes audiencias:</span><br>
+                        <span class="code-prompt">1. Versión para cliente corporativo (formal)</span><br>
+                        <span class="code-prompt">2. Versión para equipo interno (colaborativo)</span><br>
+                        <span class="code-prompt">3. Versión para redes sociales (atractivo, breve)</span><br>
+                        <span class="code-prompt">[Pega tu borrador aquí]"</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 4: Microsoft Copilot -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">💻</div>
+                    <div class="tool-name">Microsoft Copilot</div>
+                    <div class="tool-url">🔗 <a href="https://copilot.microsoft.com" target="_blank">copilot.microsoft.com</a></div>
+                    <div class="tool-desc">Integración con el ecosistema Microsoft. Nivel gratuito con acceso a GPT-5 y generación de imágenes DALL-E 3 [citation:6]. Ideal para usuarios de Windows y Office.</div>
+                    
+                    <h4>📌 Ejercicio 4.4A: Creación de presentación</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Crea una estructura detallada para una presentación de 10 diapositivas sobre 'Estrategias de marketing digital 2026'. Para cada diapositiva incluye:</span><br>
+                        <span class="code-prompt">- Título</span><br>
+                        <span class="code-prompt">- 3-5 viñetas clave</span><br>
+                        <span class="code-prompt">- Sugerencia de imagen/gráfico"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.4B: Análisis de Excel</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Simula que tienes un Excel con columnas: Producto, Región, Ventas Q1, Ventas Q2. Dame fórmulas y pasos para:</span><br>
+                        <span class="code-prompt">- Calcular crecimiento % por producto</span><br>
+                        <span class="code-prompt">- Crear tabla dinámica por región</span><br>
+                        <span class="code-prompt">- Generar gráfico comparativo automático"</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 5: Perplexity AI -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">🔍</div>
+                    <div class="tool-name">Perplexity AI</div>
+                    <div class="tool-url">🔗 <a href="https://www.perplexity.ai" target="_blank">perplexity.ai</a></div>
+                    <div class="tool-desc">Motor de búsqueda + IA que sintetiza información de múltiples fuentes con citas. Nivel gratuito con búsquedas Pro diarias limitadas [citation:5]. Ideal para investigación con fuentes verificables.</div>
+                    
+                    <h4>📌 Ejercicio 4.5A: Investigación de mercado</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Investiga: 'Tendencias de IA en el sector educativo para 2026'. Necesito:</span><br>
+                        <span class="code-prompt">- 5 tendencias principales con ejemplos concretos</span><br>
+                        <span class="code-prompt">- Empresas líderes en cada tendencia</span><br>
+                        <span class="code-prompt">- Fuentes citadas (enlaces) para verificar"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.5B: Comparativa de herramientas</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Compara Asana, Trello y Monday.com en una tabla con:</span><br>
+                        <span class="code-prompt">- Precios (plan gratuito y de pago)</span><br>
+                        <span class="code-prompt">- Funcionalidades clave</span><br>
+                        <span class="code-prompt">- Integraciones disponibles</span><br>
+                        <span class="code-prompt">- Casos de uso ideales"</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 6: Grammarly -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">✍️</div>
+                    <div class="tool-name">Grammarly</div>
+                    <div class="tool-url">🔗 <a href="https://www.grammarly.com" target="_blank">grammarly.com</a></div>
+                    <div class="tool-desc">Asistente de escritura con IA. El nivel gratuito incluye corrección gramatical básica, detector de tono y 100 prompts de IA al mes [citation:5]. Extensión para navegador y apps.</div>
+                    
+                    <h4>📌 Ejercicio 4.6A: Corrección y mejora de texto</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Pega un texto propio (ej: correo, informe) y usa Grammarly para:</span><br>
+                        <span class="code-prompt">- Identificar errores gramaticales</span><br>
+                        <span class="code-prompt">- Analizar el tono del mensaje</span><br>
+                        <span class="code-prompt">- Aplicar sugerencias de claridad y concisión</span><br>
+                        <span class="code-prompt">- Documenta 3 sugerencias que consideres más útiles"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.6B: Reesritura con IA</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Toma un párrafo complejo y pide a Grammarly (o QuillBot gratis) que lo reformule para:</span><br>
+                        <span class="code-prompt">- Hacerlo más claro</span><br>
+                        <span class="code-prompt">- Hacerlo más profesional</span><br>
+                        <span class="code-prompt">- Hacerlo más persuasivo"</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 7: DeepL -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">🌐</div>
+                    <div class="tool-name">DeepL</div>
+                    <div class="tool-url">🔗 <a href="https://www.deepl.com" target="_blank">deepl.com</a></div>
+                    <div class="tool-desc">Traductor basado en IA con calidad superior, especialmente para contextos profesionales y técnicos. Nivel gratuito con límite de 1500 caracteres por traducción [citation:5].</div>
+                    
+                    <h4>📌 Ejercicio 4.7A: Traducción técnica</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Traduce este párrafo técnico (elige un tema de tu especialidad) al inglés y al portugués. Compara con Google Translate. Analiza diferencias en precisión terminológica."</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.7B: Glosario bilingüe</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Crea un glosario bilingüe español-inglés de 20 términos técnicos de tu campo. Usa DeepL para verificar las traducciones más precisas."</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 8: n8n (automatización) -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">⚙️</div>
+                    <div class="tool-name">n8n</div>
+                    <div class="tool-url">🔗 <a href="https://n8n.io" target="_blank">n8n.io</a></div>
+                    <div class="tool-desc">Plataforma de automatización de flujos de trabajo de código abierto. Versión self-hosted gratuita ilimitada. Conecta aplicaciones sin código [citation:2][citation:7].</div>
+                    
+                    <h4>📌 Ejercicio 4.8A: Automatización básica</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Diseña un flujo en n8n (conceptual) que:</span><br>
+                        <span class="code-prompt">1. Cuando llegue un nuevo correo con asunto 'URGENTE'</span><br>
+                        <span class="code-prompt">2. Extraiga el contenido</span><br>
+                        <span class="code-prompt">3. Cree una tarea en Trello/Asana</span><br>
+                        <span class="code-prompt">4. Envíe una notificación a Slack"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.8B: Webhook simple</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Configura un webhook en n8n que reciba datos de un formulario y los envíe a Google Sheets. Documenta los pasos."</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 9: Otter.ai (transcripción) -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">🎤</div>
+                    <div class="tool-name">Otter.ai</div>
+                    <div class="tool-url">🔗 <a href="https://otter.ai" target="_blank">otter.ai</a></div>
+                    <div class="tool-desc">Transcripción automática de reuniones y entrevistas. Nivel gratuito con 300 minutos/mes [citation:7]. Genera resúmenes automáticos y extrae puntos clave.</div>
+                    
+                    <h4>📌 Ejercicio 4.9A: Transcripción de reunión</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Graba una reunión corta (10-15 min) o usa un audio de prueba. Transcríbela con Otter. Luego:</span><br>
+                        <span class="code-prompt">- Extrae los puntos de acción</span><br>
+                        <span class="code-prompt">- Identifica decisiones tomadas</span><br>
+                        <span class="code-prompt">- Genera un resumen ejecutivo"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.9B: Búsqueda en transcripciones</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Sube varias grabaciones (simuladas) y practica la búsqueda de palabras clave dentro de las transcripciones. ¿Cómo mejora esto la recuperación de información?"</span>
+                    </div>
+                </div>
+                
+                <!-- HERRAMIENTA 10: Cursor (editor con IA) -->
+                <div class="tool-card" style="margin-bottom: 30px; padding: 25px;">
+                    <div class="tool-icon">⌨️</div>
+                    <div class="tool-name">Cursor</div>
+                    <div class="tool-url">🔗 <a href="https://cursor.sh" target="_blank">cursor.sh</a></div>
+                    <div class="tool-desc">Editor de código con IA integrada. Versión gratuita limitada. Permite generar, explicar y modificar código en lenguaje natural [citation:2][citation:7]. Ideal para no programadores.</div>
+                    
+                    <h4>📌 Ejercicio 4.10A: Generación de página web</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Usa Cursor para generar una página HTML básica con:</span><br>
+                        <span class="code-prompt">- Título 'Mi Portfolio'</span><br>
+                        <span class="code-prompt">- 3 secciones: Sobre mí, Proyectos, Contacto</span><br>
+                        <span class="code-prompt">- Estilo CSS moderno con colores profesionales"</span>
+                    </div>
+                    
+                    <h4>📌 Ejercicio 4.10B: Explicación de código</h4>
+                    <div class="code-block">
+                        <span class="code-prompt">"Pega un script Python simple (o usa el de ejemplo) y pide a Cursor que explique línea por línea qué hace cada parte. Documenta el aprendizaje."</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== DIAPOSITIVA 6: MÓDULO 5 ========== -->
+            <div class="slide" id="slide6">
+                <span class="module-badge">⚡ Módulo 5 · 4 horas</span>
+                <h1>Integración y Automatización de Procesos</h1>
+                
+                <h2>🔌 APIs de IA: Conectando herramientas</h2>
+                <p>La mayoría de las herramientas ofrecen APIs para integrar IA en tus propios flujos.</p>
+                <div class="code-block">
+                    <span class="code-comment"># Ejemplo: Llamada a API de ChatGPT (conceptual)</span><br>
+                    import openai<br><br>
+                    
+                    <span class="code-comment"># Configurar API key</span><br>
+                    openai.api_key = "tu-api-key"<br><br>
+                    
+                    <span class="code-comment"># Hacer una solicitud de completado</span><br>
+                    respuesta = openai.ChatCompletion.create(<br>
+                    &nbsp;&nbsp;model="gpt-4",<br>
+                    &nbsp;&nbsp;messages=[<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{"role": "system", "content": "Eres un asistente útil."},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{"role": "user", "content": "Resume este texto: [texto]"}<br>
+                    &nbsp;&nbsp;],<br>
+                    &nbsp;&nbsp;temperature=0.3  <span class="code-comment"># Bajo para respuestas más precisas</span><br>
+                    )<br><br>
+                    
+                    <span class="code-comment"># Extraer respuesta</span><br>
+                    print(respuesta.choices[0].message.content)
+                </div>
+                
+                <h2>🤖 Zapier / Make (integradores low-code)</h2>
+                <ul>
+                    <li><strong>Zapier:</strong> Conecta apps sin código. Plan gratuito con 100 tareas/mes</li>
+                    <li><strong>Make (ex Integromat):</strong> Visual, más flexible. Plan gratuito con 1000 ops/mes</li>
+                </ul>
+                
+                <h2>📋 Casos prácticos de automatización</h2>
+                <table>
+                    <tr><th>Disparador</th><th>Acción IA</th><th>Resultado</th></tr>
+                    <tr><td>Nuevo correo con adjunto</td><td>Claude analiza PDF</td><td>Resumen guardado en Notion</td></tr>
+                    <tr><td>Formulario Google completado</td><td>ChatGPT genera respuesta personalizada</td><td>Email automático enviado</td></tr>
+                    <tr><td>Reunión en Zoom termina</td><td>Otter transcribe + GPT resume</td><td>Minutas en Slack</td></tr>
+                </table>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 5.1: Diseño de automatización <span>40 min</span></div>
+                    <p><strong>Instrucciones:</strong> Identifica un proceso repetitivo en tu trabajo/estudio que dure al menos 2 horas semanales. Diseña un flujo de automatización usando las herramientas vistas. Incluye:</p>
+                    <ul>
+                        <li>Disparador inicial (trigger)</li>
+                        <li>Paso de IA involucrado</li>
+                        <li>Acciones resultantes</li>
+                        <li>Estimación de tiempo ahorrado</li>
+                    </ul>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Ejercicio 5.2: Integración con API <span>50 min</span></div>
+                    <p><strong>Instrucciones:</strong> Usando la API gratuita de alguna herramienta (ej: OpenAI tiene crédito inicial), crea un script simple que automatice una tarea de texto. Documenta cada línea de código explicando su función.</p>
+                </div>
+            </div>
+            
+            <!-- ========== DIAPOSITIVA 7: MÓDULO 6 ========== -->
+            <div class="slide" id="slide7">
+                <span class="module-badge">🎓 Módulo 6 · 4 horas</span>
+                <h1>Proyecto Final y Mejores Prácticas</h1>
+                
+                <h2>✅ Mejores prácticas en el uso de IA</h2>
+                <ul>
+                    <li><strong>Verificación humana:</strong> La IA puede alucinar. Siempre verifica hechos.</li>
+                    <li><strong>Privacidad:</strong> No compartas información sensible en versiones gratuitas.</li>
+                    <li><strong>Iteración:</strong> Los buenos prompts se construyen probando y refinando.</li>
+                    <li><strong>Documentación:</strong> Guarda prompts exitosos para reutilizarlos.</li>
+                    <li><strong>Ética:</strong> Usa IA como apoyo, no para suplantar tu criterio.</li>
+                </ul>
+                
+                <h2>📊 Evaluación de impacto</h2>
+                <table>
+                    <tr><th>Métrica</th><th>Cómo medirla</th><th>Objetivo</th></tr>
+                    <tr><td>Tiempo ahorrado</td><td>Registro antes/después</td><td>20-40% reducción</td></tr>
+                    <tr><td>Calidad de output</td><td>Feedback de usuarios/colegas</td><td>Mejora percibida</td></tr>
+                    <tr><td>Adopción</td><td>Frecuencia de uso</td><td>>3 veces/semana</td></tr>
+                </table>
+                
+                <div class="warning-box">
+                    <h3>⚠️ Consideraciones de seguridad</h3>
+                    <p>Las herramientas gratuitas pueden usar tus datos para entrenamiento. Revisa políticas de privacidad. Para datos sensibles, considera versiones empresariales o locales [citation:1][citation:7].</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>📚 Recursos adicionales</h3>
+                    <ul>
+                        <li><a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank">Guía de Prompt Engineering de OpenAI</a></li>
+                        <li><a href="https://www.anthropic.com/prompt-library" target="_blank">Librería de prompts de Anthropic</a></li>
+                        <li><a href="https://github.com/f/awesome-chatgpt-prompts" target="_blank">Awesome ChatGPT Prompts (GitHub)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-title">📝 Proyecto Final: Solución integral con IA <span>120 min</span></div>
+                    <p><strong>Objetivo:</strong> Desarrollar una solución completa usando al menos 3 herramientas de las vistas, que resuelva un problema real de tu entorno.</p>
+                    <p><strong>Entregables:</strong></p>
+                    <ol>
+                        <li>Descripción del problema y objetivos</li>
+                        <li>Diagrama del flujo de trabajo con IA</li>
+                        <li>Prompts utilizados (explicando cada parte)</li>
+                        <li>Resultados obtenidos</li>
+                        <li>Análisis de tiempo ahorrado y mejora de calidad</li>
+                        <li>Presentación de 5 minutos al grupo</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <!-- ========== DIAPOSITIVA 8: CIERRE Y EVALUACIÓN ========== -->
+            <div class="slide" id="slide8">
+                <h1>🎉 ¡Taller completado!</h1>
+                <div style="text-align: center; padding: 40px 0;">
+                    <div style="font-size: 5rem;">🚀</div>
+                    <h2>30 horas de aprendizaje práctico</h2>
+                    <p style="font-size: 1.3rem;">Has explorado 10+ herramientas gratuitas y dominado la ingeniería de prompts.</p>
+                </div>
+                
+                <h2>📝 Evaluación del taller</h2>
+                <p>Por favor, completa esta breve encuesta para ayudarnos a mejorar:</p>
+                <ul>
+                    <li><strong>Formulario de feedback:</strong> [enlace]</li>
+                    <li><strong>Certificado de participación:</strong> [instrucciones]</li>
+                </ul>
+                
+                <h2>🔮 Próximos pasos</h2>
+                <ul>
+                    <li>Únete a comunidades de IA (Reddit, Discord, grupos locales)</li>
+                    <li>Explora herramientas específicas para tu industria</li>
+                    <li>Comparte tus aprendizajes con colegas</li>
+                    <li>Mantente actualizado (el campo cambia rápidamente)</li>
+                </ul>
+                
+                <div class="tip-box" style="margin-top: 40px;">
+                    <p style="font-size: 1.3rem; text-align: center;">¡Gracias por tu participación! Sigue experimentando y creando con IA.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CONTROLES DE NAVEGACIÓN -->
+        <div class="nav-controls">
+            <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)" disabled>◀ Anterior</button>
+            <div class="indicators" id="indicators">
+                <!-- Se generan con JS -->
+            </div>
+            <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Siguiente ▶</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de diapositivas
+        const totalSlides = 8;
+        let currentSlide = 1;
+        
+        // Elementos DOM
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const slideCounter = document.getElementById('slideCounter');
+        const indicatorsContainer = document.getElementById('indicators');
+        
+        // Generar indicadores
+        function createIndicators() {
+            indicatorsContainer.innerHTML = '';
+            for (let i = 1; i <= totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator' + (i === currentSlide ? ' active' : '');
+                indicator.textContent = i;
+                indicator.onclick = () => goToSlide(i);
+                indicatorsContainer.appendChild(indicator);
+            }
+        }
+        createIndicators();
+        
+        // Función principal para cambiar diapositiva
+        function changeSlide(direction) {
+            const newSlide = currentSlide + direction;
+            if (newSlide >= 1 && newSlide <= totalSlides) {
+                goToSlide(newSlide);
+            }
+        }
+        
+        // Ir a diapositiva específica
+        function goToSlide(n) {
+            // Ocultar todas
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Mostrar actual
+            document.getElementById(`slide${n}`).classList.add('active');
+            currentSlide = n;
+            
+            // Actualizar botones
+            prevBtn.disabled = (n === 1);
+            nextBtn.disabled = (n === totalSlides);
+            
+            // Actualizar barra de progreso
+            const progressPercent = (n / totalSlides) * 100;
+            progressFill.style.width = `${progressPercent}%`;
+            
+            // Actualizar contador
+            slideCounter.textContent = `Diapositiva ${n} de ${totalSlides}`;
+            
+            // Actualizar indicadores
+            document.querySelectorAll('.indicator').forEach((ind, idx) => {
+                if (idx + 1 === n) {
+                    ind.classList.add('active');
+                } else {
+                    ind.classList.remove('active');
+                }
+            });
+        }
+        
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+        
+        // Inicializar (por si acaso)
+        goToSlide(1);
+    </script>
+</body>
+</html>
